@@ -1,74 +1,216 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import React from 'react';
+import { Dimensions, Image, StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const { width } = Dimensions.get('window'); // Mengambil lebar layar untuk responsivitas
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
+    <ScrollView style={styles.container}>
+      {/* Header Section */}
+      <View style={styles.header}>
+        <View style={styles.userInfo}>
+          <Text style={styles.userCompany}>PT. Appsensi Tiga Ribu</Text>
+          <Text style={styles.userName}>Aprilia Appsensi</Text>
+          <Text style={styles.userRole}>Product Manager</Text>
+        </View>
         <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+          source={require('@/assets/images/icon.png')} // Replace with your user image path
+          style={styles.userImage}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      </View>
+
+      {/* Today's Attendance */}
+      <View style={styles.attendanceContainer}>
+        <View style={styles.attendanceCard}>
+          <Text style={styles.attendanceLabel}>CHECK IN</Text>
+          <Text style={styles.attendanceTime}>07:35:07 WIB</Text>
+        </View>
+        <View style={styles.attendanceCard}>
+          <Text style={styles.attendanceLabel}>CHECK OUT</Text>
+          <Text style={styles.attendanceTime}>18:05:07 WIB</Text>
+        </View>
+      </View>
+
+      {/* Features Grid */}
+      <View style={styles.featuresGrid}>
+        {[
+          { label: 'Attendance', icon: require('@/assets/images/react-logo.png') },
+          { label: 'Activity', icon: require('@/assets/images/react-logo.png') },
+          { label: 'Leave', icon: require('@/assets/images/react-logo.png') },
+          { label: 'Assignment', icon: require('@/assets/images/react-logo.png') },
+          { label: 'Overtime', icon: require('@/assets/images/react-logo.png') },
+          { label: 'Claim', icon: require('@/assets/images/react-logo.png') },
+          { label: 'Payslip', icon: require('@/assets/images/react-logo.png') },
+          { label: 'More', icon: require('@/assets/images/react-logo.png') },
+        ].map((item, index) => (
+          <TouchableOpacity key={index} style={styles.featureButton}>
+            <Image source={item.icon} style={styles.featureIcon} />
+            <Text style={styles.featureLabel}>{item.label}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {/* Recent Attendance */}
+      <View style={styles.recentAttendance}>
+        <Text style={styles.recentTitle}>Attendance</Text>
+        <View style={styles.attendanceDetails}>
+          <Text style={styles.dateText}>Yesterday (25 January 2023)</Text>
+          <Text style={styles.statusText}>Present</Text>
+        </View>
+        <View style={styles.attendanceTimes}>
+          <View>
+            <Text style={styles.checkLabel}>CHECK IN</Text>
+            <Text style={styles.checkTime}>08:45:07 WIB</Text>
+          </View>
+          <View>
+            <Text style={styles.checkLabel}>CHECK OUT</Text>
+            <Text style={styles.checkTime}>17:35:57 WIB</Text>
+          </View>
+        </View>
+      </View>
+
+      {/* Additional Card */}
+      <View style={styles.additionalCard}>
+        <Text style={styles.additionalTitle}>Important Notice</Text>
+        <Text style={styles.additionalContent}>
+          Please complete your timesheet by 5 PM today to avoid missing deadlines.
+        </Text>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
+    flex: 1,
+    backgroundColor: '#F7F9FB',
+  },
+  header: {
+    backgroundColor: '#A1CEDC',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    padding: 16,
+    borderBottomLeftRadius: 16,
+    borderBottomRightRadius: 16,
   },
-  stepContainer: {
-    gap: 8,
+  userInfo: {
+    flex: 1,
+  },
+  userCompany: {
+    fontSize: 12,
+    color: '#FFFFFF',
+  },
+  userName: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+  },
+  userRole: {
+    fontSize: 14,
+    color: '#FFFFFF',
+  },
+  userImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+  },
+  attendanceContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    margin: 16,
+  },
+  attendanceCard: {
+    backgroundColor: '#FFFFFF',
+    padding: 16,
+    borderRadius: 8,
+    elevation: 4,
+    alignItems: 'center',
+    width: width * 0.4, // Responsif terhadap lebar layar
+  },
+  attendanceLabel: {
+    fontSize: 12,
+    color: '#888888',
+  },
+  attendanceTime: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333333',
+  },
+  featuresGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    margin: 16,
+  },
+  featureButton: {
+    alignItems: 'center',
+    marginBottom: 16,
+    width: '20%',
+  },
+  featureIcon: {
+    width: 40,
+    height: 40,
+  },
+  featureLabel: {
+    marginTop: 8,
+    fontSize: 12,
+    textAlign: 'center',
+    color: '#333333',
+  },
+  recentAttendance: {
+    margin: 16,
+    backgroundColor: '#FFFFFF',
+    padding: 16,
+    borderRadius: 8,
+    elevation: 4,
+  },
+  recentTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  attendanceDetails: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+  },
+  dateText: {
+    fontSize: 12,
+    color: '#888888',
+  },
+  statusText: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: '#4CAF50',
+  },
+  attendanceTimes: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  checkLabel: {
+    fontSize: 12,
+    color: '#888888',
+  },
+  checkTime: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#333333',
+  },
+  additionalCard: {
+    backgroundColor: '#FFFFFF',
+    margin: 16,
+    padding: 16,
+    borderRadius: 8,
+    elevation: 4,
+  },
+  additionalTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    color: '#FF5722',
+  },
+  additionalContent: {
+    fontSize: 14,
+    color: '#333333',
   },
 });
