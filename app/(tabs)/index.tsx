@@ -9,12 +9,12 @@ export default function HomeScreen() {
       {/* Header Section */}
       <View style={styles.header}>
         <View style={styles.userInfo}>
-          <Text style={styles.userCompany}>PT. Appsensi Tiga Ribu</Text>
-          <Text style={styles.userName}>Aprilia Appsensi</Text>
+          <Text style={styles.userCompany}>PT. kpps uri jatim</Text>
+          <Text style={styles.userName}>Rizal Ajah</Text>
           <Text style={styles.userRole}>Product Manager</Text>
         </View>
         <Image
-          source={require('@/assets/images/icon.png')} // Replace with your user image path
+          source={require('@/assets/images/foto.png')} // Replace with your user image path
           style={styles.userImage}
         />
       </View>
@@ -34,14 +34,11 @@ export default function HomeScreen() {
       {/* Features Grid */}
       <View style={styles.featuresGrid}>
         {[
-          { label: 'Attendance', icon: require('@/assets/images/react-logo.png') },
-          { label: 'Activity', icon: require('@/assets/images/react-logo.png') },
-          { label: 'Leave', icon: require('@/assets/images/react-logo.png') },
-          { label: 'Assignment', icon: require('@/assets/images/react-logo.png') },
-          { label: 'Overtime', icon: require('@/assets/images/react-logo.png') },
-          { label: 'Claim', icon: require('@/assets/images/react-logo.png') },
-          { label: 'Payslip', icon: require('@/assets/images/react-logo.png') },
-          { label: 'More', icon: require('@/assets/images/react-logo.png') },
+          { label: 'Attendance', icon: require('@/assets/images/attendance.png') },
+          { label: 'Activity', icon: require('@/assets/images/activity.png') },
+          { label: 'Leave', icon: require('@/assets/images/leave.png') },
+          { label: 'Assignment', icon: require('@/assets/images/contract.png') },
+          { label: 'Overtime', icon: require('@/assets/images/overtime.png') },
         ].map((item, index) => (
           <TouchableOpacity key={index} style={styles.featureButton}>
             <Image source={item.icon} style={styles.featureIcon} />
